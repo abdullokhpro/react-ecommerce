@@ -1,0 +1,56 @@
+.shop {
+  padding: 100px 0;
+  background-color: #40bfff;
+  color: #fff;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  &__title {
+    font-size: 55px;
+    font-weight: 500;
+    max-width: 571px;
+  }
+
+  &__btn {
+    color: #fff;
+    text-align: left;
+    background-color: transparent;
+    font-weight: bold;
+    text-decoration: underline;
+    padding-bottom: 5px;
+  }
+}
+
+@media (max-width: 995px) {
+  .shop {
+    &__container {
+      flex-direction: column;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 660px) {
+  .shop {
+    &__left {
+      gap: 10px;
+    }
+
+    &__title {
+      font-size: 35px;
+    }
+  }
+}

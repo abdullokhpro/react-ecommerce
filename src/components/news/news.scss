@@ -1,0 +1,37 @@
+.news {
+  &__title {
+    text-align: center;
+    margin-bottom: 70px;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow: auto;
+  }
+
+  &__card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 400px;
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      span {
+        color: #c1c8ce;
+      }
+
+      h4 {
+        font-size: 22px;
+      }
+
+      p {
+        max-width: 190px;
+      }
+    }
+  }
+}

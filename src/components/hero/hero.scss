@@ -1,0 +1,105 @@
+.hero {
+  height: 100vh;
+  background: url(../../assets/home/hero-bg.png) no-repeat;
+  object-fit: cover;
+  margin-bottom: 100px;
+
+  &__title {
+    font-size: 64px;
+    line-height: 150%;
+    max-width: 573px;
+    color: #fff;
+    padding-top: 220px;
+    padding-bottom: 60px;
+  }
+}
+
+.hero-banner {
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-left: -50px;
+  }
+  &__card {
+    position: relative;
+    width: 100%;
+    &__content {
+      position: absolute;
+      display: flex;
+      padding: 20px;
+      align-items: center;
+    }
+
+    &__title {
+      max-width: 200px;
+    }
+  }
+
+  &__price {
+    color: #40bfff;
+    font-size: 30px;
+    font-weight: bold;
+  }
+}
+
+@media (max-width: 1310px) {
+  .hero-banner {
+    &__cards {
+      margin-left: 0;
+    }
+
+    &__card:nth-child(3) {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 922px) {
+  .hero-banner {
+    &__cards {
+      margin-left: 0;
+    }
+
+    &__card:nth-child(2) {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 530px) {
+  .hero-banner {
+    &__cards {
+      margin-left: 0;
+    }
+
+    &__card:nth-child(1) {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    background: url(../../assets/home/hero-bg-mobile.png) no-repeat;
+    background-position: center;
+    height: 300px;
+
+    &__title {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 150%;
+      padding-top: 100px;
+      text-align: left;
+      max-width: 209px;
+      margin-left: 60px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    &__title {
+      margin-left: 30px;
+    }
+  }
+}
