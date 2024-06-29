@@ -1,0 +1,36 @@
+.login {
+  padding: 100px 0px;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    max-width: 510px;
+    margin: 0 auto;
+
+    input {
+      padding: 16px;
+      border: 1px solid #33a0ff;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 16px;
+      background-color: #33a0ff;
+      border-radius: 10px;
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 18px;
+      transition: 0.2s;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+}

@@ -1,23 +1,16 @@
-import React, { useState } from "react";
-import "./products.scss";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { FaRegHeart } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
-import { useGetProductsQuery } from "../../context/api/productApi";
-import { useDispatch, useSelector } from "react-redux";
 import { toggleHeart } from "../../context/slices/wishlistSlice";
+import "./wishlist.scss";
 
-export const Products = () => {
-  const dispatch = useDispatch();
-  const [perPage, setPerPage] = useState(8);
-  const [offset, setOffset] = useState(1);
-  const { data, isLoading, isError, isFetching } = useGetProductsQuery({
-    limit: perPage * offset,
-  });
-
+const Wishlist = () => {
   const wishlistData = useSelector((state) => state.wishlist.value);
+  const dispatch = useDispatch();
 
-  const productItem = data?.map((el) => (
+  const wishlistItem = wishlistData?.map((el) => (
     <div key={el.id} className="products__card">
       <div className="products__card__top">
         <img src={el.image} alt={el.title} />
@@ -48,18 +41,16 @@ export const Products = () => {
   ));
 
   return (
-    <div className="products">
-      <div className="container products__container">
-        <h2 className="products__title">BEST SELLER</h2>
-        <div className="products__cards">{productItem}</div>
-        <button
-          className="products__btn"
-          disabled={isFetching}
-          onClick={() => setOffset((p) => p + 1)}
-        >
-          {isFetching ? "Loading..." : "See More"}
-        </button>
-      </div>
-    </div>
+    <>
+      {wishlistData.length ? (
+        <div className="wishlist">{wishlistItem}</div>
+      ) : (
+        <div style={{ padding: "100px" }} className="container">
+          <h1 style={{ textAlign: "center" }}>Nothing is here</h1>
+        </div>
+      )}
+    </>
   );
 };
+
+export default Wishlist;

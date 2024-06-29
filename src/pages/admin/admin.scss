@@ -1,0 +1,30 @@
+.admin {
+  padding: 100px;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  &__btns {
+    display: flex;
+    gap: 50px;
+
+    button {
+      padding: 15px 25px;
+      border-radius: 10px;
+      background-color: #33a0ff;
+      color: #fff;
+      transition: 0.2s;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+}

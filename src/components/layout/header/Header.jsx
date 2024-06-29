@@ -7,9 +7,12 @@ import { IoSearch } from "react-icons/io5";
 import logoImg from "../../../assets/home/logo.svg";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { MdExitToApp } from "react-icons/md";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [show, setShow] = useState(false);
+  const wishlistData = useSelector((state) => state.wishlist.value);
+  const isLogin = localStorage.getItem("x-auth-token");
 
   return (
     <header className="header">
@@ -42,8 +45,14 @@ const Header = () => {
             <NavLink>
               <FaRegUser className="header__top__icon" />
             </NavLink>
-            <NavLink>
+            <NavLink to={"/wishlist"}>
               <FaRegHeart className="header__top__icon" />
+              <sup
+                className="header__top__icon__digit"
+                style={{ color: "red" }}
+              >
+                {wishlistData.length}
+              </sup>
             </NavLink>
             <NavLink>
               <BsCart2 className="header__top__icon header__top__icon-cart" />
@@ -56,17 +65,21 @@ const Header = () => {
         </div>
         <div className="header__bottom">
           <div className="hedaer__logo">
-            <a href="">
+            <NavLink to={"/"}>
               <img src={logoImg} alt="here is the logo of website" />
-            </a>
+            </NavLink>
           </div>
           <div className="header__bottom__right">
             <ul className={`header__bottom__list ${show ? "show" : ""}`}>
               <li className="header__bottom__item">
-                <a href="">HOME</a>
+                <NavLink to={"/"}>HOME</NavLink>
               </li>
               <li className="header__bottom__item">
-                <a href="">BAGS</a>
+                {isLogin ? (
+                  <NavLink to={"/admin"}>ADMIN</NavLink>
+                ) : (
+                  <NavLink to={"/login"}>LOGIN</NavLink>
+                )}
               </li>
               <li className="header__bottom__item">
                 <a href="">SNEAKERS</a>
