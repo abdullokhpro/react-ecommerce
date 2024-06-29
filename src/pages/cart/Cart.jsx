@@ -12,8 +12,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./cart.scss";
+import Payment from "./payment/Payment";
 
 const Cart = () => {
+  const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const [sum, setSum] = useState(0);
   const [promo, setPromo] = useState("");
@@ -21,8 +23,8 @@ const Cart = () => {
   const cartData = useSelector((state) => state.cart.value);
 
   useEffect(() => {
-    scroll(0, 0);
-    const total = cartData.reduce((acc, el) => acc + el.price * el.amount, 0);
+    window.scroll(0, 0);
+    const total = cartData.reduce((acc, el) => acc + el.price * el.quantity, 0);
     setSum(Math.ceil(total));
   }, [cartData]);
 
@@ -36,9 +38,7 @@ const Cart = () => {
     setPromo("");
   };
 
-  const dispatch = useDispatch();
-
-  let cartItem = cartData?.map((el) => (
+  const cartItem = cartData.map((el) => (
     <div className="cart__product__main" key={el.id}>
       <div className="cart__product">
         <button
@@ -58,20 +58,19 @@ const Cart = () => {
         <p className="cart__price">${el.price}</p>
         <div className="cart__count">
           <button
-            disabled={el.amount <= 1}
-            onClick={() => dispatch(decrementCart(el.id))}
+            disabled={el.quantity <= 1}
+            onClick={() => dispatch(decrementCart(el))}
           >
             -
           </button>
-          <span> {el.amount}</span>
-          <button onClick={() => dispatch(increamentCart(el.id))}>+</button>
+          <span>{el.quantity}</span>
+          <button onClick={() => dispatch(increamentCart(el))}>+</button>
         </div>
-        <p className="unit__price">${Math.ceil(el.price * el.amount)}</p>
+        <p className="unit__price">${Math.ceil(el.price * el.quantity)}</p>
       </div>
     </div>
   ));
 
-  console.log(cartData);
   return (
     <div className="cart">
       <div className="container">
@@ -90,7 +89,7 @@ const Cart = () => {
           <form action="" onSubmit={handleAmount} className="cart__form">
             <input
               type="text"
-              name={promo}
+              name="promo"
               value={promo}
               placeholder="Voucher code"
               onChange={(e) => setPromo(e.target.value)}
@@ -108,21 +107,21 @@ const Cart = () => {
             </div>
             <div className="cart__box__item">
               <p>Coupon</p>
-              <p>{voucher}</p>
+              <p>${voucher}</p>
             </div>
             <div className="cart__box__item">
               <h3>Total</h3>
-              <p>${+sum + Math.ceil(sum * 0.02) - +voucher}</p>
+              <p>${sum + Math.ceil(sum * 0.02) - voucher}</p>
             </div>
             <button onClick={() => setModal(true)}>Check out</button>
           </div>
         </div>
       </div>
-      {/* {modal ? (
+      {modal ? (
         <Payment setModal={setModal} data={cartData} total={sum} />
       ) : (
         <></>
-      )} */}
+      )}
     </div>
   );
 };
