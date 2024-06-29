@@ -7,6 +7,7 @@ import Login from "./pages/login/Login";
 import Auth from "./components/auth/Auth";
 import Admin from "./pages/admin/Admin";
 import Contact from "./pages/contact/Contact";
+import Cart from "./pages/cart/Cart";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="wishlist" element={<Wishlist />} />
           <Route path="login" element={<Login />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="cart" element={<Cart />} />
         </Route>
         <Route path="/" element={<Auth />}>
           <Route path="admin" element={<Admin />} />

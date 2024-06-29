@@ -13,6 +13,7 @@ const Header = () => {
   const [show, setShow] = useState(false);
   const wishlistData = useSelector((state) => state.wishlist.value);
   const isLogin = localStorage.getItem("x-auth-token");
+  const cartData = useSelector((state) => state.cart.value);
 
   return (
     <header className="header">
@@ -54,8 +55,14 @@ const Header = () => {
                 {wishlistData.length}
               </sup>
             </NavLink>
-            <NavLink>
+            <NavLink to={"/cart"}>
               <BsCart2 className="header__top__icon header__top__icon-cart" />
+              <sup
+                className="header__top__icon__digit"
+                style={{ color: "red" }}
+              >
+                {cartData.length}
+              </sup>
             </NavLink>
 
             <p> Items</p>
@@ -88,7 +95,7 @@ const Header = () => {
                 <a href="">BELT</a>
               </li>
               <li className="header__bottom__item">
-                <a href="">CONTACT</a>
+                <NavLink to={"/contact"}>CONTACT</NavLink>
               </li>
               <button
                 onClick={() => setShow(false)}

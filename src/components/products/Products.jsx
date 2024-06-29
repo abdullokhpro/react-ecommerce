@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { useGetProductsQuery } from "../../context/api/productApi";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleHeart } from "../../context/slices/wishlistSlice";
+import { addToCart } from "../../context/slices/cartSlice";
 
 export const Products = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ export const Products = () => {
   });
 
   const wishlistData = useSelector((state) => state.wishlist.value);
+  const cartData = useSelector((state) => state.cart.value);
 
   const productItem = data?.map((el) => (
     <div key={el.id} className="products__card">
@@ -29,8 +31,12 @@ export const Products = () => {
               <FaRegHeart />
             )}
           </button>
-          <button>
-            <IoCartOutline />
+          <button onClick={() => dispatch(addToCart(el))}>
+            {cartData.some((state) => state.id === el.id) ? (
+              <IoCartOutline color="red" />
+            ) : (
+              <IoCartOutline />
+            )}
           </button>
         </div>
       </div>
